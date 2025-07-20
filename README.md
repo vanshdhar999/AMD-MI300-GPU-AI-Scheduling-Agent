@@ -56,10 +56,10 @@ Events are automatically categorized by priority:
 ### Layer 3: Intelligent Rescheduling
 The system makes autonomous decisions:
 
-1. **CRITICAL conflicts** ’ Find alternative time for new meeting
-2. **HIGH conflicts** ’ Evaluate importance and reschedule appropriately  
-3. **MEDIUM conflicts** ’ Automatically reschedule conflicting events
-4. **Prep meetings** ’ Schedule before main meeting, fallback to previous day
+1. **CRITICAL conflicts** â€™ Find alternative time for new meeting
+2. **HIGH conflicts** â€™ Evaluate importance and reschedule appropriately  
+3. **MEDIUM conflicts** â€™ Automatically reschedule conflicting events
+4. **Prep meetings** â€™ Schedule before main meeting, fallback to previous day
 
 ## Key Features
 
