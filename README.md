@@ -56,11 +56,11 @@ Events are automatically categorized by priority:
 ### Layer 3: Intelligent Rescheduling
 The system makes autonomous decisions:
 
-1. **CRITICAL conflicts** � Find alternative time for new meeting
-2. **HIGH conflicts** � Evaluate importance and reschedule appropriately  
-3. **MEDIUM conflicts** � Automatically reschedule conflicting events
-4. **Prep meetings** � Schedule before main meeting, fallback to previous day
-=======
+1. **CRITICAL conflicts** Find alternative time for new meeting
+2. **HIGH conflicts**Evaluate importance and reschedule appropriately  
+3. **MEDIUM conflicts**Automatically reschedule conflicting events
+4. **Prep meetings**Schedule before main meeting, fallback to previous day
+
 1. **CRITICAL conflicts** ’ Find alternative time for new meeting
 2. **HIGH conflicts** ’ Evaluate importance and reschedule appropriately  
 3. **MEDIUM conflicts** ’ Automatically reschedule conflicting events
@@ -176,22 +176,16 @@ def _detect_conflicts_and_reschedule(self, calendars, optimal_start, optimal_end
 
 ## Usage
 
-### Starting the Agent Service
-First, start the web service:
+The agent is available at the port 5000 from the Submission.ipynb file
 
-```bash
-cd AMD-MI300-AI-Scheduling-Agent
-python web_service.py
-```
-
-The agent will be available at `http://localhost:5000/schedule`
+The agent will be available at `http://localhost:5000/receive`
 
 ### Making Requests with Curl
 
 Send meeting scheduling requests using curl:
 
 ```bash
-curl -X POST http://localhost:5000/schedule \
+curl -X POST http://localhost:5000/receive \
   -H "Content-Type: application/json" \
   -d '{
     "Request_id": "meeting-001",
@@ -202,13 +196,6 @@ curl -X POST http://localhost:5000/schedule \
     "Datetime": "2025-07-21T09:00:00",
     "Location": "Conference Room A"
   }'
-```
-
-### Health Check
-Check if the service is running:
-
-```bash
-curl -X GET http://localhost:5000/health
 ```
 
 ### Response Format
