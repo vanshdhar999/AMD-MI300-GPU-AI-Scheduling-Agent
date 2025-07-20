@@ -226,6 +226,56 @@ curl -X POST http://localhost:5000/receive \
 - **Context analysis** processes complex email content in <3 seconds total
 - **Conflict resolution** handles 10+ attendees with multiple conflicts efficiently
 
+## Events List Implementation
+
+### Time Range Strategy
+
+The system populates the events list for each attendee using a **14-day rolling window** from the request timestamp:
+
+```python
+def _calculate_search_window(self, request_time: str) -> Tuple[str, str]:
+    base_time = datetime.fromisoformat(request_time.replace('T', ' '))
+    start_time = base_time
+    end_time = base_time + timedelta(days=14)  # 2-week window
+    
+    return (
+        start_time.strftime("%Y-%m-%dT00:00:00+05:30"),
+        end_time.strftime("%Y-%m-%dT23:59:59+05:30")
+    )
+```
+
+### Events Population Process
+
+**Step 1: Calendar Data Retrieval**
+- Fetches events from Google Calendar API for each attendee
+- Time range: Request date + 14 days (00:00:00 to 23:59:59 IST)
+- Filters out non-business events (personal, vacation, weekend activities)
+
+**Step 2: Event Processing**
+- Extracts attendee emails from calendar events
+- Adds "SELF" for solo business meetings (lunch, calls, demos)
+- Creates standardized event format: StartTime, EndTime, NumAttendees, Attendees, Summary
+
+**Step 3: Conflict Resolution & Rescheduling**
+- Identifies conflicting events during proposed meeting time
+- Automatically reschedules MEDIUM priority conflicts to available slots
+- Preserves HIGH/CRITICAL priority events (client meetings, workshops)
+
+**Step 4: Final Events Assembly**
+- Combines existing calendar events
+- Applies rescheduling changes (moves conflicts to new times)
+- Adds the newly requested meeting
+- Generates complete schedule for each attendee
+
+### Example Time Range
+
+For a request made on `2025-07-19T12:34:55`:
+- **Search Window**: `2025-07-19T00:00:00+05:30` to `2025-08-02T23:59:59+05:30`
+- **Coverage**: All meetings within 14 days from request date
+- **Purpose**: Provides sufficient context for intelligent scheduling decisions while maintaining performance
+
+This approach ensures comprehensive calendar visibility for conflict detection and optimal meeting placement.
+
 ## Files
 
 - `agent.py` - Main scheduling agent with all components
