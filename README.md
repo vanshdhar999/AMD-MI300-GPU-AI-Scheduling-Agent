@@ -157,7 +157,6 @@ def _detect_conflicts_and_reschedule(self, calendars, optimal_start, optimal_end
 - **Never reschedule** CRITICAL priority events
 - **Evaluate alternatives** for HIGH priority conflicts
 - **Automatically reschedule** MEDIUM priority conflicts
-- **Ignore** LOW priority or off-hours conflicts
 
 ## Installation
 
