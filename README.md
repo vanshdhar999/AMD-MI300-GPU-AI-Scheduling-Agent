@@ -56,10 +56,10 @@ Events are automatically categorized by priority:
 ### Layer 3: Intelligent Rescheduling
 The system makes autonomous decisions:
 
-1. **CRITICAL conflicts** ’ Find alternative time for new meeting
-2. **HIGH conflicts** ’ Evaluate importance and reschedule appropriately  
-3. **MEDIUM conflicts** ’ Automatically reschedule conflicting events
-4. **Prep meetings** ’ Schedule before main meeting, fallback to previous day
+1. **CRITICAL conflicts** ï¿½ Find alternative time for new meeting
+2. **HIGH conflicts** ï¿½ Evaluate importance and reschedule appropriately  
+3. **MEDIUM conflicts** ï¿½ Automatically reschedule conflicting events
+4. **Prep meetings** ï¿½ Schedule before main meeting, fallback to previous day
 
 ## Key Features
 
@@ -172,22 +172,39 @@ def _detect_conflicts_and_reschedule(self, calendars, optimal_start, optimal_end
 
 ## Usage
 
-### Basic Integration
-```python
-from agent import your_meeting_assistant
+### Starting the Agent Service
+First, start the web service:
 
-# Meeting request data
-request_data = {
+```bash
+cd AMD-MI300-AI-Scheduling-Agent
+python web_service.py
+```
+
+The agent will be available at `http://localhost:5000/schedule`
+
+### Making Requests with Curl
+
+Send meeting scheduling requests using curl:
+
+```bash
+curl -X POST http://localhost:5000/schedule \
+  -H "Content-Type: application/json" \
+  -d '{
     "Request_id": "meeting-001",
     "From": "user@company.com",
     "Attendees": [{"email": "colleague@company.com"}],
     "Subject": "Project Review",
-    "EmailContent": "Let's meet Monday at 9 AM to review the project status.",
-    "Datetime": "2025-07-21T09:00:00"
-}
+    "EmailContent": "Let'\''s meet Monday at 9 AM to review the project status.",
+    "Datetime": "2025-07-21T09:00:00",
+    "Location": "Conference Room A"
+  }'
+```
 
-# Get intelligent scheduling response
-result = your_meeting_assistant(request_data)
+### Health Check
+Check if the service is running:
+
+```bash
+curl -X GET http://localhost:5000/health
 ```
 
 ### Response Format
