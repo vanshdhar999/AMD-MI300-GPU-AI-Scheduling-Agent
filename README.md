@@ -56,10 +56,17 @@ Events are automatically categorized by priority:
 ### Layer 3: Intelligent Rescheduling
 The system makes autonomous decisions:
 
+<<<<<<< HEAD
 1. **CRITICAL conflicts** � Find alternative time for new meeting
 2. **HIGH conflicts** � Evaluate importance and reschedule appropriately  
 3. **MEDIUM conflicts** � Automatically reschedule conflicting events
 4. **Prep meetings** � Schedule before main meeting, fallback to previous day
+=======
+1. **CRITICAL conflicts** ’ Find alternative time for new meeting
+2. **HIGH conflicts** ’ Evaluate importance and reschedule appropriately  
+3. **MEDIUM conflicts** ’ Automatically reschedule conflicting events
+4. **Prep meetings** ’ Schedule before main meeting, fallback to previous day
+>>>>>>> 6044396292509fc888e9f705940b6852a2c0e975
 
 ## Key Features
 
@@ -157,7 +164,6 @@ def _detect_conflicts_and_reschedule(self, calendars, optimal_start, optimal_end
 - **Never reschedule** CRITICAL priority events
 - **Evaluate alternatives** for HIGH priority conflicts
 - **Automatically reschedule** MEDIUM priority conflicts
-- **Ignore** LOW priority or off-hours conflicts
 
 ## Installation
 
